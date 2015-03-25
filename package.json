@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/sergiodxa/dice-roller/issues"
   },
-  "homepage": "https://github.com/sergiodxa/dice-roller",
+  "homepage": "http://sergiodxa.github.io/dice-roller",
   "devDependencies": {
     "chai": "^2.1.2",
     "chai-as-promised": "^4.3.1",

@@ -1,4 +1,4 @@
-# diceRoller
+# Dice roller
 
 A tiny library to calculate roll dices using the classic D&D sintax: 1d20+4.
 
