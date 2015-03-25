@@ -16,7 +16,7 @@ The returned function is something like this:
 {
   "result": 14,
   "dices": {
-    "d4": [2,3]
+    "d4": [2,3],
     "d8": [6]
   },
   "bonus": 3
