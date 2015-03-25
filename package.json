@@ -1,0 +1,33 @@
+{
+  "name": "dice-roller",
+  "version": "1.0.0",
+  "description": "A tiny library to calculate roll dices using the classic D&D sintax.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -u bdd -R spec -r test/helpers/setup -G"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergiodxa/dice-roller.git"
+  },
+  "keywords": [
+    "d&d",
+    "dice",
+    "roller",
+    "rpg"
+  ],
+  "author": "Sergio Daniel Xalambrí <sergio@xalambri.com.ar> (http://sergio.xalambri.com.ar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergiodxa/dice-roller/issues"
+  },
+  "homepage": "https://github.com/sergiodxa/dice-roller",
+  "devDependencies": {
+    "chai": "^2.1.2",
+    "chai-as-promised": "^4.3.1",
+    "mocha": "^2.2.1"
+  }
+}
