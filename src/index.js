@@ -1,55 +1,39 @@
-/*
- * diceRoller
- *
- * Library to roll dices like '2d4+3+1d8+2'
- */
-function diceRoller(equation) {
-  try {
-    var parts = equation.toLowerCase().split("+");
+const filterDices = part => part.indexOf("d") > -1;
+const filterBonuses = part => !filterDices(part);
+const splitDicesString = part => part.split("d");
+const rollDice = (final, [_number, _faces]) => {
+  // format the key
+  const key = `d${_faces}`;
+  const number = parseInt(_number, 10);
+  const faces = parseInt(_faces, 10);
+  // roll dices individually
+  const results = Array(number)
+    .fill("")
+    .map(() => Math.floor(Math.random() * faces) + 1);
 
-    var dices = parts
-      .filter(function getDices(part) {
-        return part.indexOf("d") !== -1;
-      })
-      .map(function splitDicesStrings(part) {
-        return part.split("d");
-      });
+  return {
+    ...final,
+    dices: {
+      ...final.dices,
+      [key]: results
+    },
+    result: (final.result || 0) + results.reduce((prev, next) => prev + next)
+  };
+};
+const sumBonuses = (final, _bonus) => {
+  const bonus = parseInt(_bonus, 10);
+  return {
+    ...final,
+    bonus: (final.bonus || 0) + bonus,
+    result: final.result + bonus
+  };
+};
 
-    var bonuses = parts.filter(function getBonuses(part) {
-      return part.indexOf("d") === -1;
-    });
-
-    var returned = {
-      result: 0,
-      dices: {},
-      bonus: 0
-    };
-
-    dices.forEach(function rollDice(dice) {
-      var number = parseInt(dice[0]);
-      var faces = parseInt(dice[1]);
-      var r = 0;
-
-      returned.dices["d" + faces] = returned.dices["d" + faces] || [];
-
-      for (var i = 0; i < number; i++) {
-        res = Math.floor(Math.random() * faces) + 1;
-        returned.dices["d" + faces].push(res);
-        r += res;
-      }
-
-      returned.result += r;
-    });
-
-    bonuses.forEach(function plusBonus(bonus) {
-      returned.bonus += parseInt(bonus);
-      returned.result += parseInt(bonus);
-    });
-
-    return returned;
-  } catch (err) {
-    return err;
-  }
-}
+const diceRoller = equation => {
+  const parts = equation.toLowerCase().split("+");
+  const dices = parts.filter(filterDices).map(splitDicesString);
+  const bonuses = parts.filter(filterBonuses);
+  return bonuses.reduce(sumBonuses, dices.reduce(rollDice, {}));
+};
 
 module.exports = diceRoller;
