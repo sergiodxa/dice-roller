@@ -1,6 +1,6 @@
-FROM mhart/alpine-node:8
+FROM mhart/alpine-node
 WORKDIR /usr/src
-COPY package.json now.json ./
-RUN yarn install
-RUN yarn test --coverage
-RUN cp ./coverage /public
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . .
+RUN yarn test --coverage && mv ./coverage/lcov-report /public
