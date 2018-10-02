@@ -1,11 +1,7 @@
 const filterDices = part => part.indexOf("d") > -1;
 const filterBonuses = part => !filterDices(part);
-const splitDicesString = part => part.split("d");
-const rollDice = (final, [_number, _faces]) => {
-  // format the key
-  const key = `d${_faces}`;
-  const number = parseInt(_number, 10);
-  const faces = parseInt(_faces, 10);
+const splitDicesString = part => part.split("d").map(v => parseInt(v, 10));
+const rollDice = (final, [number, faces]) => {
   // roll dices individually
   const results = Array(number)
     .fill("")
@@ -15,7 +11,7 @@ const rollDice = (final, [_number, _faces]) => {
     ...final,
     dices: {
       ...final.dices,
-      [key]: results
+      [`d${faces}`]: results
     },
     result: (final.result || 0) + results.reduce((prev, next) => prev + next)
   };
@@ -44,8 +40,8 @@ const pick = (final, amount) => {
     .sort()
     .reverse()
     .slice(0, amount);
-  
-    return {
+
+  return {
     ...final,
     dices: {
       [key]: final.dices[key]
