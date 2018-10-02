@@ -29,11 +29,43 @@ const sumBonuses = (final, _bonus) => {
   };
 };
 
+const pick = (final, amount) => {
+  const dices = Object.keys(final.dices);
+
+  if (dices.length > 1) {
+    throw new Error(
+      "pick only works with the results of rolling only one dice"
+    );
+  }
+
+  const key = dices[0];
+
+  const dice = final.dices[key]
+    .sort()
+    .reverse()
+    .slice(0, amount);
+  
+    return {
+    ...final,
+    dices: {
+      [key]: final.dices[key]
+        .sort()
+        .reverse()
+        .slice(0, amount)
+    },
+    result: dice.reduce((prev, next) => prev + next) + (final.bonus || 0)
+  };
+};
+
 const diceRoller = equation => {
   const parts = equation.toLowerCase().split("+");
   const dices = parts.filter(filterDices).map(splitDicesString);
   const bonuses = parts.filter(filterBonuses);
-  return bonuses.reduce(sumBonuses, dices.reduce(rollDice, {}));
+  const final = bonuses.reduce(sumBonuses, dices.reduce(rollDice, {}));
+  return {
+    ...final,
+    pick: pick.bind(null, final)
+  };
 };
 
 module.exports = diceRoller;

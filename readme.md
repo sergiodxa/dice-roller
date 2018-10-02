@@ -6,8 +6,9 @@ A tiny library to calculate roll dices using the classic D&D sintax: 1d20+4.
 Just load and execute the function:
 
 ```javascript
-var diceRoller = require('dice-roller');
-var result = diceRoller('2d4+1d8+3');
+import roll from "dice-roller";
+const result = roll("2d4+1d8+3");
+const picked = roll("4d6").pick(3);
 ```
 
 The returned function is something like this:
@@ -22,6 +23,7 @@ The returned function is something like this:
   "bonus": 3
 }
 ```
+
 
 ## Tests
 Just run the command:
