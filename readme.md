@@ -2,6 +2,10 @@
 
 A tiny library to calculate roll dices using the classic D&D sintax: 1d20+4.
 
+<a href="https://www.patreon.com/sergiodxa">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
 ## How to use:
 Just load and execute the function:
 
