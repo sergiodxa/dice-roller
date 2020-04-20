@@ -26,6 +26,6 @@
   },
   "homepage": "http://sergiodxa.github.io/dice-roller",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^25.4.0"
   }
 }
